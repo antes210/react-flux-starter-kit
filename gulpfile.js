@@ -21,7 +21,7 @@ gulp.task('webserver', function() {
   browserSync.use({
     plugin: function () { /* noop */},
     hooks: {
-        'client:js': require("fs").readFileSync("./closer.js", "utf-8") 
+        'client:js': require("fs").readFileSync("./lib/closer.js", "utf-8") 
     }
   });
 
