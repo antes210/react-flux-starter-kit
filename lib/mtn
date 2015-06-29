@@ -1,0 +1,32 @@
+#!/bin/sh
+if test "$1" == "dew"
+then
+  if test "$2" == "flux" 
+  then
+    sed -e "s;%NAME%;$3;g" lib/dispatcher_template.js > app/dispatchers/$3Dispatcher.js
+    sed -e "s;%NAME%;$3;g" lib/actions_template.js > app/actions/$3Actions.js
+    sed -e "s;%NAME%;$3;g" lib/constants_template.js > app/constants/$3Constants.js
+    sed -e "s;%NAME%;$3;g" lib/stores_template.js > app/stores/$3Store.js
+    tree app/dispatchers app/actions app/constants app/stores --noreport
+   
+  fi
+  if test "$2" == "react" 
+  then
+    sed -e "s;%NAME%;$3;g" lib/component_template.js > $4/$3.js
+  fi
+fi
+if test "$1" == "throwback"
+then
+  if test "$2" == "flux"
+  then
+    rm -f app/dispatchers/$3Dispatcher.js
+    rm -f app/actions/$3Actions.js
+    rm -f app/constants/$3Constants.js
+    rm -f app/stores/$3Store.js
+  fi
+fi
+if test "$1" == "install"
+  then  
+  cp  "${BASH_SOURCE[0]}" /usr/local/bin/mtn
+  chmod u+x /usr/local/bin/mtn
+fi

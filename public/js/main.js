@@ -3,7 +3,31 @@
 //var React = require('react');
 
 React.render (
-  React.createElement("h1", null, "Adfinet"),
+
+    React.createElement(Row, {className: "show-grid"}, 
+      React.createElement(Row, null, 
+      React.createElement(Col, {md: 12}, 
+        React.createElement(Jumbotron, {className: "text-center"}, React.createElement("h1", null, "React-Flux Starter Project")), 
+         "generator browsersync", 
+        React.createElement("div", null, " Run `bash lib/mtn install` ")
+      )
+      ), 
+      React.createElement(Row, null, 
+        React.createElement(Col, {md: 3, className: "text-center well"}, 
+          "ReactBootstrap"
+        ), 
+        React.createElement(Col, {md: 3, className: "text-center well"}, 
+          "Jquery"
+        ), 
+        React.createElement(Col, {md: 3, className: "text-center well"}, 
+          "JqueryUI"
+        ), 
+        React.createElement(Col, {md: 3, className: "text-center well"}, 
+          "Radium"
+        )
+      )
+    )
+,
   document.getElementById('main')
 );
 
