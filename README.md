@@ -11,18 +11,9 @@ If you are like me, a starter kit should have a folder structure imposed, common
 * [NPM](https://www.npmjs.com/)
 
 ##Installation
-TODO: Publish to NPM
-
-Currently do:
-
-1. Clone the repo and run npm install.
-```bash
-npm install
-```
-2. If you want the generator install it by running: 
-```bash
-bash lib/mtn install
-```
+1. npm install react-flux-starter-kit for every project you want to create
+This will install to the current folder but without an node-modules folder.
+2. Run npm install to get the rest of the modules
 3. Start the Server by running:
 ```bash
 gulp
@@ -36,22 +27,24 @@ gulp server:minified
 ```
 ├── app
 │   ├── actions
-│   ├── api
 │   ├── components
+│   │   └── app.js
 │   ├── constants
 │   ├── dispatchers
 │   ├── stores
-│   └── main.js
+│   ├── main.js
+│   └── router.js
 ├── docs
 ├── lib
 │   ├── actions_template.js
 │   ├── closer.js
 │   ├── component_template.js
 │   ├── constants_template.js
+│   ├── convert.js
 │   ├── dispatcher_template.js
 │   ├── mtn
+│   ├── router_template.js
 │   └── stores_template.js
-├── node_modules(generated through npm install)
 ├── public
 │   ├── assets
 │   ├── js
@@ -67,13 +60,14 @@ gulp server:minified
 │   │       ├── jquery.min.js
 │   │       ├── radium.min.js
 │   │       ├── react-bootstrap.min.js
+│   │       ├── react.js
 │   │       └── react.min.js
 │   └── index.html
-├── README.md
 ├── gulpfile.js
 └── package.json
 ```
 
-Closer.js describe!
+TODO:
+Closer.js describe
 react bootstrap imports file
 

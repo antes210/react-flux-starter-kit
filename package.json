@@ -1,6 +1,6 @@
 {
   "name": "react-flux-starter-kit",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Includes BrowserSync Browserify React Flux Radium Bootstrap Bootstrap-react jquery jquery-ui gulp custom-cli",
   "main": "gulpfile.js",
   "directories": {
