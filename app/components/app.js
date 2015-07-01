@@ -1,6 +1,6 @@
-// var Constants = require('../constants/AppConstants');
-// var Store = require('../stores/AppStore');
-// var Actions = require('../actions/AppActions');
+// var Constants = require('../constants/app_constants');
+// var Store = require('../stores/app_store');
+// var Actions = require('../actions/app_actions');
 
 var App = Radium(React.createClass({
   // Initializer
@@ -23,22 +23,20 @@ var App = Radium(React.createClass({
    });
   },
   render: function(){
-    return(
-      <Row>
-        <Col>
-          <Jumbotron className="text-center">
-            <h1>Welcome to React-Flux-Starter-Kit</h1> 
-          </Jumbotron>
-        </Col>
-      </Row>
-    )
+    // return(
+    //   <div>
+    //     {this.state.gameLeaders.map(function(f,i){
+    //       return <li>{f} at index {i}</li>;
+    //     })}
+    //   <div>    
+    // )
   }
 
 }));
 
 var styles ={
   base:{
-    
+
   }
 }
 

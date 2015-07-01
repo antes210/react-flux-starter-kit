@@ -7,3 +7,5 @@ echo node_modules > ../../.gitignore
 mv ./gulpfile.js ../../
 mv ./package_new.json ../../package.json
 rm -r ../../node_modules
+cd ../..
+echo "export REACT_ROOT=\"`pwd`\"" > ~/.mtn_settings

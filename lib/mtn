@@ -1,32 +1,37 @@
 #!/bin/sh
+source ~/.mtn_settings
+echo $REACT_ROOT
 if test "$1" == "dew"
 then
   if test "$2" == "flux" 
   then
-    sed -e "s;%NAME%;$3;g" lib/dispatcher_template.js > app/dispatchers/$3Dispatcher.js
-    sed -e "s;%NAME%;$3;g" lib/actions_template.js > app/actions/$3Actions.js
-    sed -e "s;%NAME%;$3;g" lib/constants_template.js > app/constants/$3Constants.js
-    sed -e "s;%NAME%;$3;g" lib/stores_template.js > app/stores/$3Store.js
-    tree app/dispatchers app/actions app/constants app/stores --noreport
+    name=$(node $REACT_ROOT/lib/convert.js $3)
+    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/dispatcher_template.js  > $REACT_ROOT/app/dispatchers/"$name"_dispatcher.js
+    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/actions_template.js | sed -e "s;%UNDER%;$name;g" > $REACT_ROOT/app/actions/"$name"_actions.js
+    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/constants_template.js | sed -e "s;%UNDER%;$name;g" > $REACT_ROOT/app/constants/"$name"_constants.js
+    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/stores_template.js | sed -e "s;%UNDER%;$name;g" > $REACT_ROOT/app/stores/"$name"_store.js
+    tree $REACT_ROOT/app/dispatchers $REACT_ROOT/app/actions $REACT_ROOT/app/constants $REACT_ROOT/app/stores --noreport
    
   fi
   if test "$2" == "react" 
   then
-    sed -e "s;%NAME%;$3;g" lib/component_template.js > $4.js
+    name=$(node $REACT_ROOT/lib/convert.js $3)
+    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/component_template.js | sed -e "s;%UNDER%;$name;g" > "$name".js
   fi
   if test "$2" == "future"
     then
-    cp lib/router_template.js  app/router.js
+    cp $REACT_ROOT/lib/router_template.js  $REACT_ROOT/app/router.js
   fi
 fi
 if test "$1" == "throwback"
 then
   if test "$2" == "flux"
   then
-    rm -f app/dispatchers/$3Dispatcher.js
-    rm -f app/actions/$3Actions.js
-    rm -f app/constants/$3Constants.js
-    rm -f app/stores/$3Store.js
+    name=$(node $REACT_ROOT/lib/convert.js $3)
+    rm -f $REACT_ROOT/app/dispatchers/"$name"_dispatcher.js
+    rm -f $REACT_ROOT/app/actions/"$name"_actions.js
+    rm -f $REACT_ROOT/app/constants/"$name"_constants.js
+    rm -f $REACT_ROOT/app/stores/"$name"_store.js
   fi
 fi
 if test "$1" == "install"
