@@ -12,7 +12,11 @@ then
   fi
   if test "$2" == "react" 
   then
-    sed -e "s;%NAME%;$3;g" lib/component_template.js > $4/$3.js
+    sed -e "s;%NAME%;$3;g" lib/component_template.js > $4.js
+  fi
+  if test "$2" == "future"
+    then
+    cp lib/router_template.js  app/router.js
   fi
 fi
 if test "$1" == "throwback"
@@ -30,3 +34,4 @@ if test "$1" == "install"
   cp  "${BASH_SOURCE[0]}" /usr/local/bin/mtn
   chmod u+x /usr/local/bin/mtn
 fi
+

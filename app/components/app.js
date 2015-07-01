@@ -1,8 +1,8 @@
-// var Constants = require('../constants/%NAME%Constants');
-// var Store = require('../stores/%NAME%Store');
-// var Actions = require('../actions/%NAME%Actions');
+// var Constants = require('../constants/AppConstants');
+// var Store = require('../stores/AppStore');
+// var Actions = require('../actions/AppActions');
 
-var %NAME% = Radium(React.createClass({
+var App = Radium(React.createClass({
   // Initializer
   //getInitialState: function() {
     //Actions.get();
@@ -23,13 +23,15 @@ var %NAME% = Radium(React.createClass({
    });
   },
   render: function(){
-    // return(
-    //   <div>
-    //     {this.state.gameLeaders.map(function(f,i){
-    //       return <li>{f} at index {i}</li>;
-    //     })}
-    //   <div>    
-    // )
+    return(
+      <Row>
+        <Col>
+          <Jumbotron className="text-center">
+            <h1>Welcome to React-Flux-Starter-Kit</h1> 
+          </Jumbotron>
+        </Col>
+      </Row>
+    )
   }
 
 }));
@@ -40,4 +42,4 @@ var styles ={
   }
 }
 
-module.exports = %NAME%;
+module.exports = App;
