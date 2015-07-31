@@ -1,42 +1,96 @@
 #!/bin/sh
-source ~/.mtn_settings
-echo $REACT_ROOT
+DIR=$( dirname "${BASH_SOURCE[0]}" )
+
 if test "$1" == "dew"
 then
+  if test "$2" == "project"
+  then
+    mkdir "$3"
+    cp -r "$DIR/mtn_lib/app" "$3/"
+    cp -r "$DIR/mtn_lib/public" "$3/"
+    sed -e "s;%NAME%;$3;g" "$DIR/mtn_lib/package_new.json"  > "$3/package.json"
+    sed -e "s;%NAME%;$3;g" "$DIR/mtn_lib/public/index.html"  > "$3/public/index.html"
+    cp "$DIR/mtn_lib/webpack.config.js" "$3/webpack.config.js"
+    echo ""
+    echo "Please cd into the directory and run these to complete the installation:"
+    echo "npm install -g webpack"
+    echo "npm install"
+  fi
   if test "$2" == "flux" 
   then
-    name=$(node $REACT_ROOT/lib/convert.js $3)
-    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/dispatcher_template.js  > $REACT_ROOT/app/dispatchers/"$name"_dispatcher.js
-    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/actions_template.js | sed -e "s;%UNDER%;$name;g" > $REACT_ROOT/app/actions/"$name"_actions.js
-    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/constants_template.js | sed -e "s;%UNDER%;$name;g" > $REACT_ROOT/app/constants/"$name"_constants.js
-    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/stores_template.js | sed -e "s;%UNDER%;$name;g" > $REACT_ROOT/app/stores/"$name"_store.js
-    tree $REACT_ROOT/app/dispatchers $REACT_ROOT/app/actions $REACT_ROOT/app/constants $REACT_ROOT/app/stores --noreport
-   
-  fi
-  if test "$2" == "react" 
-  then
-    name=$(node $REACT_ROOT/lib/convert.js $3)
-    sed -e "s;%NAME%;$3;g" $REACT_ROOT/lib/component_template.js | sed -e "s;%UNDER%;$name;g" > "$name".js
-  fi
-  if test "$2" == "future"
+  REACT_ROOT=$(node $DIR/mtn_lib/lib/js/root.js "$(dirname "$(npm bin)")")
+    if test "$4" == "-c" 
     then
-    cp $REACT_ROOT/lib/router_template.js  $REACT_ROOT/app/router.js
+      name=$(node $DIR/mtn_lib/lib/js/convert.js $3)
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/dispatcher_template_comments.js  > "$REACT_ROOT"/app/dispatchers/"$name"_dispatcher.js
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/actions_template_comments.js | sed -e "s;%UNDER%;$name;g" > "$REACT_ROOT"/app/actions/"$name"_actions.js
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/constants_template_comments.js | sed -e "s;%UNDER%;$name;g" > "$REACT_ROOT"/app/constants/"$name"_constants.js
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/stores_template_comments.js | sed -e "s;%UNDER%;$name;g" > "$REACT_ROOT"/app/stores/"$name"_store.js
+    else
+      name=$(node $DIR/mtn_lib/lib/js/convert.js $3)
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/dispatcher_template.js  > "$REACT_ROOT"/app/dispatchers/"$name"_dispatcher.js
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/actions_template.js | sed -e "s;%UNDER%;$name;g" > "$REACT_ROOT"/app/actions/"$name"_actions.js
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/constants_template.js | sed -e "s;%UNDER%;$name;g" > "$REACT_ROOT"/app/constants/"$name"_constants.js
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/stores_template.js | sed -e "s;%UNDER%;$name;g" > "$REACT_ROOT"/app/stores/"$name"_store.js
+    fi
+  fi
+  if test "$2" == "component" 
+  then
+  REACT_ROOT=$(node $DIR/mtn_lib/lib/js/root.js "$(dirname "$(npm bin)")")
+    if test "$4" == "-c" 
+    then
+      name=$(node $DIR/mtn_lib/lib/js/convert.js $3)
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/component_template_comments.js | sed -e "s;%UNDER%;$name;g" > "$name".js
+    else
+      REACT_ROOT=$(node $DIR/mtn_lib/lib/js/root.js "$(dirname "$(npm bin)")")
+      name=$(node $DIR/mtn_lib/lib/js/convert.js $3)
+      sed -e "s;%NAME%;$3;g" "$DIR"/mtn_lib/lib/component_template.js | sed -e "s;%UNDER%;$name;g" > "$name".js
+    fi
+  fi
+  if test "$2" == "router"
+    then
+    name=$(node $DIR/mtn_lib/lib/js/convert.js $3)
+    cp "$DIR"/mtn_lib/lib/router_template.js  "$REACT_ROOT"/app/router.js
   fi
 fi
 if test "$1" == "throwback"
 then
-  if test "$2" == "flux"
-  then
-    name=$(node $REACT_ROOT/lib/convert.js $3)
-    rm -f $REACT_ROOT/app/dispatchers/"$name"_dispatcher.js
-    rm -f $REACT_ROOT/app/actions/"$name"_actions.js
-    rm -f $REACT_ROOT/app/constants/"$name"_constants.js
-    rm -f $REACT_ROOT/app/stores/"$name"_store.js
-  fi
+REACT_ROOT=$(node $DIR/mtn_lib/lib/js/root.js "$(dirname "$(npm bin)")")
+name=$(node $DIR/mtn_lib/lib/js/convert.js $2)
+    rm -f "$REACT_ROOT"/app/dispatchers/"$name"_dispatcher.js
+    rm -f "$REACT_ROOT"/app/actions/"$name"_actions.js
+    rm -f "$REACT_ROOT"/app/constants/"$name"_constants.js
+    rm -f "$REACT_ROOT"/app/stores/"$name"_store.js
+
 fi
-if test "$1" == "install"
-  then  
-  cp  "${BASH_SOURCE[0]}" /usr/local/bin/mtn
-  chmod u+x /usr/local/bin/mtn
+if test "$1" == "s"
+  then 
+  webpack --watch --
+fi
+if test "$1" == "t"
+  then
+  webpack --watch --specs.html
+fi
+if test "$1" == "test"
+  then
+  webpack --watch --specs.html
+fi
+if test "$1" == "server"
+  then 
+  webpack --watch --
+fi
+if test "$1" == "-h"
+  then
+  echo "Mtn is a React-Flux CLI Tool that exposes the following capabilities:"
+  echo "mtn dew project [name] :: Creates a Project"
+  echo "mtn dew flux [NameInCapcase] :: Creates A Store, Dispatcher, Actions and Constants"
+  echo "mtn dew flux [NameInCapcase] -c :: Same as Above except contains helper comments"
+  echo "mtn dew component [NameInCapcase] :: Creates a react component class"
+  echo "mtn dew router :: creates a Future-Router"
+  echo  "mtn throwback [FluxNameInCapcase] :: Destroys the Store, Dispatcher, Actions and Constants" 
+  echo "mtn s{erver} :: Starts the server"
+  echo "More information can be viewed at:"
+  echo "https://github.com/timthez/react-flux-starter-kit"
+  echo "https://github.com/timthez/future-router"
 fi
 

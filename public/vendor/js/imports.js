@@ -44,3 +44,9 @@ var Input = rb.Input;
 var FormControls = rb.FormControls;
 var ButtonInput = rb.ButtonInput;
 var ParkersAPuppy = "ParkersAPuppy";
+
+var css = function(){
+    var args = [true, {}];
+    args = $.merge(args, Array.prototype.splice.call(arguments, 0));
+ return $.extend.apply(null, args);
+}

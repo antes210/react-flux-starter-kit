@@ -4,25 +4,27 @@ If you are like me, a starter kit should have a folder structure imposed, common
 ## Built In Services
 * [BrowserSync](http://www.browsersync.io/)
 * [React Bootstrap](https://react-bootstrap.github.io/)
-* [Radium](http://projects.formidablelabs.com/radium/)
 * [JQuery](https://jquery.com/)
 * [JQuery-UI](https://jqueryui.com/)
-* [Gulp](http://gulpjs.com/)
+* [Webkit](http://webpack.github.io/)
 * [NPM](https://www.npmjs.com/)
 
 ##Installation
-1. npm install react-flux-starter-kit for every project you want to create
-This will install to the current folder but without an node-modules folder.
-2. Run npm install to get the rest of the modules
-3. Start the Server by running:
+1. npm install -g react-flux-starter-kit 
+    this will install a command called mtn 
+2. Navigate to a directory where you would like a new project to reside and run
 ```bash
-gulp
-#default task on gulp start the server
-gulp server
-#or if you want the js to be minified
-gulp server:minified
+mtn dew project [project_name]   (projects folder name)
 ```
-
+3. Once it is complete run :
+```bash
+npm install -g webpack
+npm install
+```
+4. Then start the server with:
+```bash
+mtn s
+```
 ## File Structure
 ```
 ├── app
@@ -34,19 +36,10 @@ gulp server:minified
 │   ├── stores
 │   ├── main.js
 │   └── router.js
-├── docs
-├── lib
-│   ├── actions_template.js
-│   ├── closer.js
-│   ├── component_template.js
-│   ├── constants_template.js
-│   ├── convert.js
-│   ├── dispatcher_template.js
-│   ├── mtn
-│   ├── router_template.js
-│   └── stores_template.js
 ├── public
 │   ├── assets
+│   │   └── images
+│   │       └── mtn.png (used on starter page)
 │   ├── js
 │   │   └── main.js
 │   ├── vendor
@@ -63,11 +56,8 @@ gulp server:minified
 │   │       ├── react.js
 │   │       └── react.min.js
 │   └── index.html
-├── gulpfile.js
-└── package.json
+├── package.json
+└── webpack.config.js
 ```
 
-TODO:
-Closer.js describe
-react bootstrap imports file
 
