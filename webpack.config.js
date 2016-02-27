@@ -11,7 +11,11 @@ module.exports = {
         loaders: [{
             test: /\.js[x]*$/,
             loaders: ["jsx-loader?harmony"],
-        }]
+        }],
+        preLoaders: [{
+            test: /\.js[x]*$/,
+            loaders: ["future-loader"],
+        }],
     },
 
 }
