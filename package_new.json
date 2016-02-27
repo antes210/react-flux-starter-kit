@@ -15,17 +15,17 @@
   },
   "paths": {
     "app": {
-      "all": "/app",
+      "all": "\\app",
       "main": "main.js"
     },
     "public": {
       "js": {
-        "all": "/public/js",
+        "all": "\\public\\js",
         "main": "main.js"
       },
-      "assets": "public/assets",
-      "vendor": "public/vendor",
-      "index": "public/index.html"
+      "assets": "public\\assets",
+      "vendor": "public\\vendor",
+      "index": "public\\index.html"
     }
   }
 }

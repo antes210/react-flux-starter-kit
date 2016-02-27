@@ -1,5 +1,5 @@
-var App = require(___app.js___);
-require(___router.js___);
+var App = require('./components/app.js');
+require('./router.js');
 React.render (
     <App id="app"/>,
   document.getElementById('main')
